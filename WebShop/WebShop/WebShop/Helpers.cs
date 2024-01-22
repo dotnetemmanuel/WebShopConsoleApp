@@ -17,7 +17,7 @@ namespace WebShop
 
         //############################################################
         //SHOW DATA & MENUS
-        public static void Admin()
+        public static async Task Admin()
         {
             Console.Clear();
 
@@ -30,6 +30,7 @@ namespace WebShop
                 Console.WriteLine("Press 'C' for Customer");
                 Console.WriteLine("Press 'P' for Product categories");
                 Console.WriteLine("Press 'S' for Statistics");
+                Console.WriteLine();
                 Console.WriteLine("Press any key to go back");
 
                 var key = char.ToLower(Console.ReadKey(true).KeyChar);
@@ -48,7 +49,7 @@ namespace WebShop
                         AdminCustomer();
                         break;
                     case 'p':
-                        ShowAdminCategories();
+                        await ShowAdminCategoriesAsync();
                         break;
                     case 's':
                         ShowStatistics();
@@ -178,17 +179,23 @@ namespace WebShop
             }
         }
 
-        public static void ShowAdminCategories()
+        public static async Task ShowAdminCategoriesAsync()
         {
             Console.Clear();
-            Console.WriteLine("Pants");
-            Console.WriteLine("Jersey");
-            Console.WriteLine("Shoes");
+            using (var database = new WebshopContext())
+            {
+                var categories = await database.Categories.ToListAsync();
+
+                foreach (var category in categories)
+                {
+                    Console.WriteLine("Id:" + category.Id + " - " + category.Name);
+                }
+            }
+
             Console.WriteLine();
             Console.WriteLine("Press any key to go back");
             Console.ReadKey();
             Console.Clear();
-            Admin();
         }
 
         public static void ShowCart()

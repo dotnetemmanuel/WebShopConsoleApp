@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             //Following 4 methods will only run if database is not populated ↴
             Helpers.AddDeliveries();
@@ -33,7 +33,7 @@
                 switch (key)
                 {
                     case 'a':
-                        Helpers.Admin();
+                        await Helpers.Admin();
                         break;
 
                     case 'c':

@@ -10,7 +10,6 @@
             Helpers.AddCategories();
             Helpers.AddTestData();
 
-
             while (true)
             {
                 Console.Clear();

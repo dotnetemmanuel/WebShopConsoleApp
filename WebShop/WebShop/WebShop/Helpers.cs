@@ -175,7 +175,6 @@ namespace WebShop
                     }
                     Console.WriteLine();
                 }
-
             }
         }
 
@@ -266,7 +265,7 @@ namespace WebShop
                         {
                             foreach (var product in database.Products.Where(p => p.CategoryId == 1))
                             {
-                                Console.WriteLine("Id: " + product.Id + "\tName: " + product.ProductName.PadRight(35) + "\tSize: " + product.ClothingSize + "\tPrice: " + product.Price.ToString().PadRight(7) + " SEK");
+                                Console.WriteLine("Id: " + product.Id + "\tName: " + product.ProductName.PadRight(35) + "\tSize: " + product.ClothingSize.ToString().PadRight(10) + "\tPrice: " + product.Price.ToString().PadRight(7) + " SEK");
                             }
                             Console.WriteLine();
                             ShowProductDetails();
@@ -278,7 +277,7 @@ namespace WebShop
                         {
                             foreach (var product in database.Products.Where(p => p.CategoryId == 2))
                             {
-                                Console.WriteLine("Id: " + product.Id + "\tName: " + product.ProductName.PadRight(35) + "\tSize: " + product.ClothingSize + "\tPrice: " + product.Price.ToString().PadRight(7) + " SEK");
+                                Console.WriteLine("Id: " + product.Id + "\tName: " + product.ProductName.PadRight(35) + "\tSize: " + product.ClothingSize.ToString().PadRight(10) + "\tPrice: " + product.Price.ToString().PadRight(7) + " SEK");
                             }
                             Console.WriteLine();
                             ShowProductDetails();
@@ -290,7 +289,7 @@ namespace WebShop
                         {
                             foreach (var product in database.Products.Where(p => p.CategoryId == 3))
                             {
-                                Console.WriteLine("Id: " + product.Id + "\tName: " + product.ProductName.PadRight(35) + "\tSize: " + product.ShoeSize + "\tPrice: " + product.Price.ToString().PadRight(7) + " SEK");
+                                Console.WriteLine("Id: " + product.Id + "\tName: " + product.ProductName.PadRight(35) + "\tSize: " + product.ShoeSize.ToString().PadRight(10) + "\tPrice: " + product.Price.ToString().PadRight(7) + " SEK");
                             }
                             Console.WriteLine();
                             ShowProductDetails();
@@ -1034,7 +1033,7 @@ namespace WebShop
                 {
                     for (int i = 0; i < shoppingCart.Count(); i++)
                     {
-                        Console.WriteLine("Id: " + i + " - " + shoppingCart[i].ProductName + ":\t" + shoppingCart[i].Price + " SEK");
+                        Console.WriteLine("Id: " + i + " - " + shoppingCart[i].ProductName.PadRight(10) + shoppingCart[i].Price + " SEK");
                         sum += shoppingCart[i].Price;
                     }
                 }
@@ -1149,13 +1148,13 @@ namespace WebShop
                 Console.WriteLine();
                 Console.WriteLine("Write what you want to edit");
                 var editProduct = Console.ReadLine()?.ToLower(); // ? = method only called if input is not null
-
-                Console.WriteLine("Write the new info");
-                var newProductInfo = Console.ReadLine().ToUpper();
-
+                var newProductInfo = "";
                 switch (editProduct)
                 {
                     case "product name":
+
+                        Console.WriteLine("Write the new info");
+                        newProductInfo = Console.ReadLine().ToUpper();
                         if (newProductInfo != null)
                         {
                             findProduct.ProductName = newProductInfo;
@@ -1164,6 +1163,8 @@ namespace WebShop
                         }
                         break;
                     case "product info":
+                        Console.WriteLine("Write the new info");
+                        newProductInfo = Console.ReadLine().ToUpper();
                         if (newProductInfo != null)
                         {
                             findProduct.ProductInfo = newProductInfo;
@@ -1172,6 +1173,8 @@ namespace WebShop
                         }
                         break;
                     case "price":
+                        Console.WriteLine("Write the new info");
+                        newProductInfo = Console.ReadLine().ToUpper();
                         if (newProductInfo != null)
                         {
                             if (decimal.TryParse(newProductInfo, out decimal newPrice))
@@ -1187,6 +1190,7 @@ namespace WebShop
                         }
                         break;
                     case "size":
+                        Console.WriteLine("Write the new size (S-XL)");
                         var newSize = "";
                         if (newProductInfo != null)
                         {
@@ -1227,6 +1231,8 @@ namespace WebShop
                         }
                         break;
                     case "supplier":
+                        Console.WriteLine("Write the new info");
+                        newProductInfo = Console.ReadLine().ToUpper();
                         if (newProductInfo != null)
                         {
                             findProduct.Supplier = newProductInfo;
@@ -1235,6 +1241,8 @@ namespace WebShop
                         }
                         break;
                     case "stock":
+                        Console.WriteLine("Write the new info");
+                        newProductInfo = Console.ReadLine().ToUpper();
                         if (newProductInfo != null)
                         {
                             if (int.TryParse(newProductInfo, out int newStock))
@@ -1249,7 +1257,7 @@ namespace WebShop
                             }
                         }
                         break;
-                    case "Selected product"://bool
+                    case "selected product"://bool
                         Console.WriteLine("Do you want to show the product on the front page y/n");
                         var answer = Console.ReadLine().ToLower();
                         if (answer == "y")
